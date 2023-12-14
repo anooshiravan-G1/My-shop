@@ -1,0 +1,127 @@
+<div class="tab-content">
+
+
+    <div class="tab-pane fade show active" id="pd-desc">
+        <div class="pd-tab__desc">
+            <div class="u-s-m-b-15">
+                {{ product.description|safe }}
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div class="tab-pane" id="pd-tag">
+        <div class="pd-tab__tag">
+            <div class="u-s-m-b-15">
+                <div class="pd-table gl-scroll">
+                    <table>
+                        <tbody >
+                            {% for spec in specifications %}
+                            <tr>
+                                <td style="color: gray;">{{ spec.name }}</td>
+                                <td style="color: black;">{{ spec.value }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+    <div class="tab-pane" id="pd-rev">
+        <div class="pd-tab__rev">
+            <div class="u-s-m-b-30">
+                <div class="pd-tab__rev-score">
+                    <div class="u-s-m-b-8">
+                        <h4>We want to hear from you!</h4>
+                    </div>
+                    <span class="gl-text">Tell us what you think about this item</span>
+                </div>
+            </div>
+            {% if comments %}
+                    {% for comment in comments %}
+                        {% if not comment.hidden %} 
+                        <div class="u-s-m-b-30 {% if comment.user and comment.user.is_superuser %}superuser-comment"{% endif %}>
+                            <div class="rev-f1__review">
+                                <div class="review-o u-s-m-y-15">
+                                    <div class="review-o__info u-s-m-y-20">
+                                        <strong>
+                                            {% if comment.name %}
+                                                 <span class="review-o__name">({{ comment.name }})</span>
+                                            {% elif comment.user %}
+                                                <span class="review-o__name">({{ comment.user.username }})</span>
+                                            {% else %}
+                                                <span class="review-o__name">John Doe</span>
+                                            {% endif %}
+                                        </strong>
+                                        <span>{{ comment.created_at|date:"F d, Y H:i" }}</span>
+                                    </div>
+                                    
+                                    <p class="review-o__text" style="font-siz: 13px; color: black;">{{ comment.text }}</p>
+                                {% if comment.get_visible_replies %}
+                                    
+                                        {% for reply in comment.get_visible_replies %}
+                                        <div class="u-s-m-b-30 {% if reply.user and reply.user.is_superuser %}superuser-comment"{% endif %}>
+                                            <div class="rev-f1__review">
+                                                <div class="review-o u-s-m-b-15">
+                                                    <div class="review-o__info u-s-m-b-8">
+                                                        <strong>
+                                                    {% if reply.user %}
+                                                    <span class="review-o__name">{{ reply.user.username }}</span>
+                                                    {% else %}
+                                                     <span class="review-o__name"> Anonymous</span>
+                                                    {% endif %}
+                                                </strong>
+                                                <span>{{ reply.created_at|date:"F d, Y H:i" }}</span>
+                                                <p class="review-o__text">{{ reply.text }}</p>
+                                        {% endfor %}
+                                    
+                                {% endif %}
+                        {% endif %}
+                    {% endfor %}
+            {% endif %}
+            <div class="u-s-m-y-60">
+                {% if request.user.is_authenticated %}
+                <form method="post" class="pd-tab__rev-f2" action="{% url 'shop:product_detail' product.uuid product.slug %}">
+                    {% csrf_token %}
+                    <h2 class="u-s-m-b-15">Add a Review</h2>
+
+                    <span class="gl-text u-s-m-b-15">Your email address will not be published. Required fields are marked *</span>
+                    <div class="rev-f2__group">
+                        <div class="u-s-m-b-15">
+
+                            {{ comment_form.text.label_tag }}
+                            {{ comment_form.text }}
+                        </div>
+                        <div>
+                            <p class="u-s-m-b-30">
+
+                                {{ comment_form.name.label_tag }}
+                                {{ comment_form.name }}
+                            </p>
+                            <p class="u-s-m-b-30">
+
+                                {{ comment_form.email.label_tag }}
+                                {{ comment_form.email }}
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+
+                        <button class="btn btn--e-brand-shadow" type="submit">SUBMIT</button></div>
+                </form>
+                {% else %}
+                    <p style="font-size: 15px; color: black;"> Please <a href="{% url 'accounts:login' %}">log in</a> to add a review. </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</div>

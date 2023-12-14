@@ -1,0 +1,139 @@
+{% extends 'shop/base.html' %}
+
+
+
+{% block title %}
+     My shop - {{ user.first_name }} {{ user.last_name }} Orders
+{% endblock %}
+
+
+{% block content %}
+
+
+
+
+<div class="app-content">
+
+    
+    <div class="u-s-p-y-60">
+
+
+        <div class="section__content">
+            <div class="container">
+                <div class="breadcrumb">
+                    <div class="breadcrumb__wrap">
+                        <ul class="breadcrumb__list">
+                            <li class="has-separator">
+
+                                <a href="{% url 'shop:product_list' %}">Home</a>
+                            </li>
+                            <li class="has-separator">
+                                
+                                <a href="{% url 'accounts:user_dashboard' %}">My Account</a>
+                            </li>
+                            <li class="is-marked">                                
+                                <a href="{% url 'accounts:order_list' %}">My Orders</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="u-s-p-b-60">
+
+        <div class="section__content">
+            <div class="dash">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-12">
+
+
+                            <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
+                                <div class="dash__pad-1">
+                                    {% if user.is_authenticated %}
+                                        <span class="dash__text u-s-m-b-16">Hello {{ user.first_name }} {{ user.last_name }} </span>
+                                    {% else %}
+                                        <span class="dash__text u-s-m-b-16">Hello</span>
+                                    {% endif %}
+                                    <ul class="dash__f-list">
+                                        <li>
+
+                                            <a href="{% url 'accounts:user_dashboard' %}">Dashboard</a>
+                                        </li>
+                                        <li>
+
+                                            <a href="{% url 'accounts:edit_profile' %}">Edit Profile</a>
+                                        </li>
+                                        <li>
+
+                                            <a href="{% url 'accounts:change_password' %}">Change Password</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="dash__box dash__box--bg-white dash__box--shadow dash__box--w">
+                                <div class="dash__pad-1">
+                                    <ul class="dash__w-list">
+                                        <li>
+                                            <div class="dash__w-wrap">
+
+                                                <span class="dash__w-icon dash__w-icon-style-1"><i class="fas fa-cart-arrow-down"></i></span>
+
+                                                <span class="dash__w-text">{{ orders.count }}</span>
+
+                                                <span class="dash__w-name">Orders Placed</span></div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-12">
+                            <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white u-s-m-b-30">
+                                <div class="dash__pad-2">
+                                    <h1 class="dash__h1 u-s-m-b-14">My Orders</h1>
+
+                                    <span class="dash__text u-s-m-b-30">Here you can see all products that have been delivered.</span>
+                                    {% if orders %}
+                                        <div class="m-order__list">
+                                            {% for order in orders %}
+                                            <div class="m-order__get">
+                                                <div class="manage-o__header u-s-m-b-30">
+                                                    <div class="dash-l-r">
+                                                        <div>
+                                                            <div class="manage-o__text-2 u-c-secondary">Order #{{ order.generate_order_number }}</div>
+                                                            <div class="manage-o__text u-c-silver">Placed on {{ order.created }}</div>
+                                                        </div>
+                                                        <div>
+                                                            <div class="dash__link dash__link--brand">
+
+                                                                <a href="{% url 'accounts:order_detail' order_uuid=order.uuid %}">see details</a></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
+                                        <p style="font-size: 18px;">You haven't placed any orders yet.</p>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

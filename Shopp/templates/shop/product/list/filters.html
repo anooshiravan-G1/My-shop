@@ -1,0 +1,64 @@
+<div class="col-lg-3 col-md-12">
+    <div class="shop-w-master">
+        <h1 class="shop-w-master__heading u-s-m-b-30"><i class="fas fa-filter u-s-m-r-8"></i>
+
+            <span>FILTERS</span></h1>
+        <div class="shop-w-master__sidebar sidebar--bg-snow">
+            <div class="u-s-m-b-30">
+                <div class="shop-w">
+                    <div class="shop-w__intro-wrap">
+                        <h1 class="shop-w__h">CATEGORY</h1>
+
+                        <span class="fas fa-minus shop-w__toggle" data-target="#s-category" data-toggle="collapse"></span>
+                    </div>
+                    <div class="shop-w__wrap collapse show" id="s-category">
+
+
+
+
+
+                        <ul class="shop-w__category-list gl-scroll">
+                            <li id="all-category" class="has-list {% if not category %}selected{% endif %}">
+                                <a href="{% url 'shop:product_by_category_list' 'all' %}" style="font-size: 15px;">ALL</a>
+                                {% if categories %}
+                                    <ul style="display: inherit;">
+                                        {% for c in categories %}
+                                            {% if not c.parent_category %}
+                                                <li class="has-list {% if category.slug == c.slug or category.parent_category == c %}selected{% endif %}">
+                                                    <a href="{% url 'shop:product_by_category_list' c.get_absolute_url %}" style="font-size: 13px;">{{ c.name }}</a>
+                                                    {% if c.subcategories.all %}
+                                                        <ul class="u-s-m-t-20 u-s-m-b-40" style="margin-left: 5px; display: inherit;">
+                                                            {% for child in c.subcategories.all %}
+                                                                <li class="has-list" style="margin-left: 10px;">
+                                                                    <a href="{% url 'shop:product_by_category_list' child.get_absolute_url %}" style="font-size: 11px;">{{ child.name }}</a>
+                                                                    {% if child.subcategories.all %}
+                                                                        <ul style="margin-left: 5px; display: inherit;">
+                                                                            {% for grandchild in child.subcategories.all %}
+                                                                                <li {% if category.slug == grandchild.slug %}class="selected"{% endif %}>
+                                                                                    <a href="{% url 'shop:product_by_category_list' grandchild.get_absolute_url %}" style="font-size: 9px;">{{ grandchild.name }}</a>
+                                                                                </li>
+                                                                            {% endfor %}
+                                                                        </ul>
+                                                                    {% endif %}
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    {% endif %}
+                                                </li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </li>
+                        </ul>
+                        
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

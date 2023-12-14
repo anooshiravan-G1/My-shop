@@ -1,0 +1,154 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+  My shop - User Dashboard
+{% endblock %}
+
+{% block content %}
+
+
+<div class="app-content">
+  <div class="u-s-p-y-60">
+    <div class="section__content">
+        <div class="container">
+            <div class="breadcrumb">
+                <div class="breadcrumb__wrap">
+                    <ul class="breadcrumb__list">
+                        <li class="has-separator">
+
+                            <a href="{% url "shop:product_list" %}">Home</a></li>
+                        <li class="is-marked">
+
+                            <a href="{% url "accounts:user_dashboard" %}">My Account</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="u-s-p-b-60">
+
+    
+    <div class="section__content">
+        <div class="dash">
+          <div class="container">
+            <div class="row">
+              {% if not user.is_active %}
+              <div class="section__content">
+                <div class="container">
+                    <div class="row row--center">
+                        <div class="col-lg-6 col-md-8 u-s-m-b-30">
+                          <div class="l-f-o">
+                            <div class="l-f-o__pad-box">
+                              <p>Your account is not yet activated.</p>
+                              <form method="post" action="{% url 'accounts:resend_activation' %}">
+                                {% csrf_token %}
+                                <div class="form-group u-s-p-y-40">
+                                  <div>
+                                    <button class="btn btn--e-brand u-s-p-t-70" type="submit">Resend Activation Email</button>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+            {% endif %}
+            {% if messages %}
+              <ul class="messages">
+                {% for message in messages %}
+                  <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    <div class="section__content">
+        <div class="dash">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-12">
+
+                      
+                      <div class="dash__box dash__box--bg-white dash__box--shadow u-s-m-b-30">
+                          <div class="dash__pad-1">
+                              {% if user.is_authenticated %}
+                                  <span class="dash__text u-s-m-b-16">Hello {{ user.first_name }} {{ user.last_name }} </span>
+                              {% else %}
+                                  <span class="dash__text u-s-m-b-16">Hello</span>
+                              {% endif %}
+                              <ul class="dash__f-list">
+                                  <li>
+
+                                      <a href="{% url 'accounts:order_list' %}">Orders</a>
+                                  </li>
+                                  <li>
+
+                                      <a href="{% url 'accounts:edit_profile' %}">Edit Profile</a>
+                                  </li>
+                                  <li>
+
+                                      <a href="{% url 'accounts:change_password' %}">Change Password</a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-9 col-md-12">
+                        <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white u-s-m-b-30">
+                            <div class="dash__pad-2">
+                                <h1 class="dash__h1 u-s-m-b-14">Manage My Account</h1>
+
+
+
+                                <span class="dash__text u-s-m-b-30">From your My Account Dashboard you have the ability to view a snapshot of your recent account activity and update your account information. Select a link below to view or edit information.</span>
+                                <div class="row">
+                                    <div class="col-lg-6 u-s-m-b-30">
+                                        <div class="dash__box dash__box--bg-grey dash__box--shadow-2 u-h-100">
+                                            <div class="dash__pad-3">
+                                                <h2 class="dash__h2 u-s-m-b-8">PERSONAL PROFILE</h2>
+                                                <div class="dash__link dash__link--secondary u-s-m-b-8">
+
+                                                    <a href="{% url 'accounts:edit_profile' %}">Edit</a></div>
+
+                                                <span class="dash__text">{{ user.first_name }} {{ user.last_name }}</span>
+
+                                                <span class="dash__text">{{ user.email }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 u-s-m-b-30">
+                                        <div class="dash__box dash__box--bg-grey dash__box--shadow-2 u-h-100">
+                                            <div class="dash__pad-3">
+                                                <h2 class="dash__h2 u-s-m-b-8">ADDRESS BOOK</h2>
+
+                                                <span class="dash__text-2 u-s-m-b-8">Default Shipping Address</span>
+                                                <div class="dash__link dash__link--secondary u-s-m-b-8">
+
+                                                    <a href="{% url 'accounts:edit_profile' %}">Edit</a></div>
+
+                                                <span class="dash__text">{{ user.address }}</span>
+
+                                                <span class="dash__text">(+0) {{ user.phone_number }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+
+{% block title %}
+    {% if category %}
+        {{ category.name }}
+    {% else %}
+        Products
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="app-content">
+    <div class="u-s-p-y-90">
+        <div class="container">
+            <div class="row">
+                
+                {% include 'shop/product/list/filters.html' %}  
+
+                {% include 'shop/product/list/products.html' %}
+
+            </dvi>
+        </dvi>
+    </dvi>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+
+{% endblock %}

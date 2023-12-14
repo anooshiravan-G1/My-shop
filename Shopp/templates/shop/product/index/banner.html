@@ -1,0 +1,31 @@
+
+{% if latest_banner %}
+
+
+    <div class="u-s-p-y-120" style="background: #f5f5f5 url( ' {{ latest_banner.image.url }} ' ) repeat fixed center center;')">
+        <div class="u-s-p-y-120">
+
+        <div class="section__content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="banner-bg__wrap">
+                            <div class="banner-bg__text-1">
+
+                                {{ latest_banner.description|safe }}
+                                {% if latest_banner.button and latest_banner.get_absolute_url != "#" %}
+                                    <a class="banner-bg__shop-now btn--e-secondary another-effect" href="{{ latest_banner.get_absolute_url }}" style=" color: white;" onmouseover="this.style.backgroundColor='#656565'" onmouseout="this.style.backgroundColor='#383838'"> {{ latest_banner.button }}</a>
+                                {% elif latest_banner.get_absolute_url != "#" %}
+                                        <a class="banner-bg__shop-now btn--e-secondary another-effect" href="{{ latest_banner.get_absolute_url }}" style=" color: white;" onmouseover="this.style.backgroundColor='#656565'" onmouseout="this.style.backgroundColor='#383838'"> check it now </a>
+                                {% else %}
+                                    <a class="shop-now-link btn--e-brand" href="" style="visibility: hidden;" ></a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}

@@ -1,0 +1,20 @@
+{% extends 'shop/base.html' %}
+
+{% block title %}
+  My shop - user profile activation
+{% endblock %}
+
+{% block content %}
+<div class="app-content">
+  <div class="u-s-p-y-60">
+    <div class="container">
+      <h2>Activation Email Sent</h2>
+      {% if email_sent %}
+        <p>We've sent an activation email to {{ email }}. Please check your inbox and click on the activation link to complete the signup process.</p>
+      {% else %}
+        <p>Something went wrong with sending the activation email. Please try again.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}

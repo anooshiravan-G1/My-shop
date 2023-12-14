@@ -1,0 +1,120 @@
+{% load static %}
+
+
+<div class="col-lg-9 col-md-12">
+    <div class="shop-p">
+        <div class="shop-p__toolbar u-s-m-b-30">
+            <div class="shop-p__meta-wrap u-s-m-b-60">
+
+                <span class="shop-p__meta-text-1">{% if category %}{{ category.name }}{% else %}Products{% endif %}</span>
+                <span class="shop-p__meta-text-2">FOUND {{ number_of_products }} RESULTS</span>
+                
+            </div>
+            <div class="shop-p__tool-style">
+                <div class="tool-style__group u-s-m-b-8">
+
+                    <span class="js-shop-grid-target">Grid</span>
+
+                    <span class="js-shop-list-target is-active">List</span>
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="shop-p__collection">
+            <div class="row is-list-active">
+
+                {% for product in products %}
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        {% if product.uuid and product.slug %}
+                            <div class="product-m">
+                                <div class="product-m__thumb">
+                                    
+                                    <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{% url 'shop:product_detail' product.uuid product.slug %}">
+
+                                        <img class="aspect__img" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" alt="{{ product.name }}">
+                                    </a>
+                                    <div class="product-m__quick-look">
+
+                                        <a class="fas fa-search" data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick Look" style="visibility: hidden;"></a>
+                                    </div>
+                                    <div class="product-m__add-cart">
+
+                                        <a class="btn--e-brand" data-modal="modal" data-modal-id="#add-to-cart" href="{% url 'shop:product_detail' product.uuid product.slug %}">See Product</a>
+                                    </div>
+                                </div>
+                                <div class="product-m__content">
+                                    <div class="product-m__category">
+
+                                        <a href="{% url 'shop:product_by_category_list' product.category.get_absolute_url %}">{{ product.category.name }}</a>
+                                    </div>
+                                    <div class="product-m__name">
+
+                                        <a href="{% url 'shop:product_detail' product.uuid product.slug %}">{{ product.name }}</a>
+                                    </div>
+
+
+                                   
+
+
+
+
+
+
+
+                                    <div class="product-m__price">
+                                        {% if product.is_discount_active %}
+                                            <span style="text-decoration: line-through;">${{ product.price }}</span>
+                                            <br>
+                                            <strong>${{ product.get_discounted_price }}</strong>
+                                        {% else %}
+                                            ${{ product.price }}
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <div class="product-m__hover">
+                                        <div class="product-m__preview-description">
+
+                                            <span>{{ product.smallDescription }}</span>
+                                        </div>
+                                        <div class="product-m__wishlist">
+
+                                            <a class="far fa-heart" href="#" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist" style="visibility: hidden;"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+        <div class="u-s-p-y-60">
+
+
+            <ul class="shop-p__pagination">
+                <span class="step-links">
+                    {% if products.has_previous %}
+                      <a href="?page=1">&laquo; first</a>
+                      <a href="?page={{ products.previous_page_number }}">previous</a>
+                    {% endif %}
+              
+                    <span class="current">
+                      Page {{ products.number }} of {{ products.paginator.num_pages }}.
+                    </span>
+              
+                    {% if products.has_next %}
+                      <a href="?page={{ products.next_page_number }}">next</a>
+                      <a href="?page={{ products.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                  </span>
+            </ul>
+
+        </div>
+    </div>
+</div>
+

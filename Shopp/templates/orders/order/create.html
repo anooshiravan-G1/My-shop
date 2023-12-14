@@ -1,0 +1,187 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+ My shop - Checkout
+{% endblock %}
+{% block content %}
+<div class="app-content">
+    <div class="u-s-p-y-60">
+  
+  
+        <div class="section__content">
+            <div class="container">
+                <div class="breadcrumb">
+                    <div class="breadcrumb__wrap">
+                        <ul class="breadcrumb__list">
+                            <li class="has-separator">
+  
+                                <a href="{% url 'shop:product_list' %}">Home</a>
+                            </li>
+                            <li class="has-separator">
+  
+                                <a href="{% url 'cart:cart_detail' %}">Cart</a></li>
+                            </li>
+                            <li class="is-marked">
+  
+                                <a href="{% url "orders:order_create" %}">Check Out</a></li>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="u-s-p-b-60">
+        <div class="section__intro u-s-m-b-60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section__text-wrap">
+                            <h1 class="section__heading u-c-secondary">{% trans "Checkout" %}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section__content">
+            <div class="container">
+                <div class="row row--center">
+                    <div class="col-12 u-s-m-b-30">
+                        <div class="table-responsive">
+                            <table class="table-p">
+                                <h1 class="gl-h1">{% trans "Your order" %}</h1>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Price price</th>
+                                    <th>Coupons</th>
+
+                                 </tr>
+                                {% for item in cart %}
+                                {% with product=item.product %}
+                                <tr>
+                                    <td>
+                                        <div class="table-p__box">
+                                            <div class="table-p__img-wrap">
+                                              <a href="{{ product.get_absolute_url }}">
+                                                <img class="u-img-fluid" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" alt="">
+                                              </a>
+                                            </div>
+                                            <div class="table-p__info">
+
+                                                <span class="table-p__name">
+
+                                                    <a href="product-detail.html">{{ product.name }}</a></span>
+
+                                                <span class="table-p__category">
+
+                                                    <a href="shop-side-version-2.html">{{ product.category.name }}</a></span>
+                                                <ul class="table-p__variant-list">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                        <span class="table-p__price">{{ item.quantity }} x {{ product.name }}</span>
+                                        <span class="table-p__price">${{ item.total_price|floatformat:2 }}</span>
+                                    </td>
+                                    <td>
+
+                                        {% if cart.coupon %}
+                                            <span>
+                                                {% blocktrans with code=cart.coupon.code discount=cart.coupon.discount %}
+                                                    "{{ code }}" ({{ discount }} % off)
+                                                {% endblocktrans %}
+                                                {% trans "Total" %}: ${{ cart.get_total_price_after_discount|floatformat:2 }}
+                                            </span>
+                                            <span class="">- ${{ cart.get_discount|floatformat:2 }}</span>
+                                        {% else %}
+                                                <span class="">there is not coupons</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endwith %}
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-12 u-s-m-b-30">
+                        <div class="l-f-o">
+                            <div class="l-f-o__pad-box">
+                                <form method="POST" class="l-f-o__form" >
+                                    {% csrf_token %}
+                                    <div class="form-group u-s-p-y-15">
+                                        <label class="u-s-p-y-20" for="id_old_password">first name:</label>
+                                        <div class="your-custom-input-container">
+                                          {{ form.first_name }}
+                                          {% for error in form.first_name.errors %}
+                                            <p style="color: red;" class="error-message">{{ error }}</p>
+                                          {% endfor %}
+                                        </div>
+                                      </div>
+                                    <div class="form-group u-s-p-y-15">
+                                        <label class="u-s-p-y-20" for="id_old_password">last name:</label>
+                                        <div class="your-custom-input-container">
+                                          {{ form.last_name }}
+                                          {% for error in form.last_name.errors %}
+                                            <p style="color: red;" class="error-message">{{ error }}</p>
+                                          {% endfor %}
+                                        </div>
+                                      </div>
+                                    <div class="form-group u-s-p-y-15">
+                                        <label class="u-s-p-y-20" for="id_old_password">eamil:</label>
+                                        <div class="your-custom-input-container">
+                                          {{ form.email }}
+                                          {% for error in form.email.errors %}
+                                            <p style="color: red;" class="error-message">{{ error }}</p>
+                                          {% endfor %}
+                                        </div>
+                                      </div>
+                                    <div class="form-group u-s-p-y-15">
+                                        <label class="u-s-p-y-20" for="id_old_password">address:</label>
+                                        <div class="your-custom-input-container">
+                                          {{ form.address }}
+                                          {% for error in form.address.errors %}
+                                            <p style="color: red;" class="error-message">{{ error }}</p>
+                                          {% endfor %}
+                                        </div>
+                                      </div>
+                                    <div class="form-group u-s-p-y-15">
+                                        <label class="u-s-p-y-20" for="id_old_password">postal code:</label>
+                                        <div class="your-custom-input-container">
+                                          {{ form.postal_code }}
+                                          {% for error in form.postal_code.errors %}
+                                            <p style="color: red;" class="error-message">{{ error }}</p>
+                                          {% endfor %}
+                                        </div>
+                                      </div>
+                                    <div class="form-group u-s-p-y-15">
+                                        <label class="u-s-p-y-20" for="id_old_password">city:</label>
+                                        <div class="your-custom-input-container">
+                                          {{ form.city }}
+                                          {% for error in form.city.errors %}
+                                            <p style="color: red;" class="error-message">{{ error }}</p>
+                                          {% endfor %}
+                                        </div>
+                                      </div>
+                                    
+                                      <div class="form-group u-s-p-y-40">
+                                        <div>
+                                          <button class="btn btn--e-brand u-s-p-t-70" type="submit">Place Order</button>
+                                        </div>
+                                      </div>
+                                </form>
+
+                            </div>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+        </div>
+    </div>
+    </div>
+
+
+{% endblock %}

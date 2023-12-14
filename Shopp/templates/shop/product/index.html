@@ -1,0 +1,32 @@
+{% extends "shop/base.html" %}
+{% load static %}
+
+
+{% block title %}
+    {% if category %}
+        {{ category.name }}
+    {% else %}
+        Products
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+{% include 'shop/product/index/slider.html' %}
+
+{% include 'shop/product/index/last_discounts.html' %}
+
+{% include 'shop/product/index/get_categories.html' %}
+
+{% include 'shop/product/index/products.html' %}
+
+{% include 'shop/product/index/banner.html' %}
+
+{% include 'shop/product/index/banner_category.html' %}
+
+{% include 'shop/product/index/orders_details.html'%}
+
+{% include 'shop/product/modals/quickview.html' %}
+
+{% endblock %}
+

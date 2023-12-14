@@ -1,0 +1,152 @@
+{% extends 'shop/base.html' %}
+{% load static %}
+
+{% block title %}
+My shop - CONTACT US
+{% endblock %}
+
+{% block content %}
+<div class="app-content">
+
+    <div class="u-s-p-y-60">
+        <div class="section__content">
+            <div class="container">
+                <div class="breadcrumb">
+                    <div class="breadcrumb__wrap">
+                        <ul class="breadcrumb__list">
+                            <li class="has-separator">
+
+                                <a href="{% url 'shop:product_list' %}">Home</a></li>
+                            <li class="is-marked">
+
+                                <a href="{% url 'shop:contact' %}">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="u-s-p-b-60">
+        <div class="section__content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 u-s-m-b-30">
+                        <div class="contact-o u-h-100">
+                            <div class="contact-o__wrap">
+                                <div class="contact-o__icon"><i class="fas fa-phone-volume"></i></div>
+
+                                <span class="contact-o__info-text-1">LET'S HAVE A CALL</span>
+
+                                <span class="contact-o__info-text-2">(+0) 900 901 904</span>
+
+                                <span class="contact-o__info-text-2">(+0) 900 901 902</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 u-s-m-b-30">
+                        <div class="contact-o u-h-100">
+                            <div class="contact-o__wrap">
+                                <div class="contact-o__icon"><i class="fas fa-map-marker-alt"></i></div>
+
+                                <span class="contact-o__info-text-1">OUR LOCATION</span>
+
+                                <span class="contact-o__info-text-2">4247 Ashford Drive VA-20006</span>
+
+                                <span class="contact-o__info-text-2">Virginia US</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 u-s-m-b-30">
+                        <div class="contact-o u-h-100">
+                            <div class="contact-o__wrap">
+                                <div class="contact-o__icon"><i class="far fa-clock"></i></div>
+
+                                <span class="contact-o__info-text-1">WORK TIME</span>
+
+                                <span class="contact-o__info-text-2">5 Days a Week</span>
+
+                                <span class="contact-o__info-text-2">From 9 AM to 7 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="u-s-p-b-60">
+        <div class="section__content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="contact-area u-h-100">
+                            <div class="contact-area__heading">
+                                <h2>Get In Touch</h2>
+                                {% if message %}
+                                    <h4> {{ message }}</h4>
+                                    <a class="about__link btn--e-secondary" href="{% url 'shop:product_list' %}" target="_blank">Shop Now</a>
+                                {% endif %}
+                            </div>
+                            {% if form %}
+                            <form class="contact-f" method="post" action="{% url 'shop:contact' %}">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6 u-h-100">
+                                        <div class="u-s-m-b-30">
+
+                                            <label for="c-name"></label>
+
+                                            {{ form.name }}
+                                            {% for error in form.name.errors %}
+                                                <p style="color: red;" class="error-message">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="u-s-m-b-30">
+
+                                            <label for="c-email"></label>
+                                            {{ form.email }}
+                                            {% for error in form.email.errors %}
+                                                <p style="color: red;" class="error-message">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="u-s-m-b-30">
+                                            
+                                            <label for="c-subject"></label>
+                                            
+                                            {{ form.subject }}
+                                            {% for error in form.subject.errors %}
+                                                <p style="color: red;" class="error-message">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                        <div class="col-lg-6 col-md-6 u-h-100">
+                                            <div class="u-s-m-b-30">
+                                                <label for="c-message"></label>
+                                                {{ form.message }}
+                                                {% for error in form.messsage.errors %}
+                                                    <p style="color: red;" class="error-message">{{ error }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+
+                                        <button class="btn btn--e-brand-b-2" type="submit">Send Message</button>
+                                    </div>
+                                </div>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

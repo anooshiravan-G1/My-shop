@@ -1,0 +1,39 @@
+{% load static %}
+
+<div class="pd u-s-m-b-30">
+    <div class="slider-fouc pd-wrap">
+        <div id="pd-o-initiate">
+            <div class="pd-o-img-wrap" data-src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+
+                <img class="u-img-fluid" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" data-zoom-image="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" alt="{{ product.name }} image">
+            </div>
+            {% if images %}
+                {% for image in images %}
+                    <div class="pd-o-img-wrap" data-src="{{ image.image.url }}">
+
+                        <img class="u-img-fluid" src="{{ image.image.url }}" data-zoom-image="{{ image.image.url }}" alt="image {{ forloop.counter }} from {{ product.name }}">
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+    <div class="u-s-m-t-15">
+        <div class="slider-fouc">
+            <div id="pd-o-thumbnail">
+                <div>
+                    <img class="u-img-fluid" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" data-zoom-image="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" alt="{{ product.name }} image">
+                </div>
+                {% if images %}
+                    {% for image in images %}
+                    <div>
+                        <img class="u-img-fluid" src="{{ image.image.url }}" alt="thumbnail from {{ product.name }}">
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            
+
+            </div>
+        </div>
+    </div>
+</div>

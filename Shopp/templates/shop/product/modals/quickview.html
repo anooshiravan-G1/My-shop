@@ -1,0 +1,83 @@
+{% load i18n %}
+{% load static %}
+{% block title %}
+{{ product.name }}
+{% endblock %}
+{% block content %}
+
+<div class="modal fade" id="quick-look">
+    <div class="modal-dialog modal-dialog-centered" id="js-product-detail-modal">
+        <div class="modal-content modal--shadow">
+
+            <button class="btn dismiss-button fas fa-times" type="button" data-dismiss="modal"></button>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-5"> 
+
+
+                        <!--====== Product Detail ======-->
+                        
+                        <div class="pd u-s-m-b-30">
+                           
+                                <div class="pd-wrap">
+                                    <div id="js-product-detail-modal">
+                                        <div>
+
+                                            <img class="u-img-fluid modal-image" src="" alt="" id="product-image">
+                                        </div>
+                                    </div>
+                                </div>
+                           
+                        </div>
+                        
+                        <!--====== End - Product Detail ======-->
+                    </div>
+                    <div class="col-lg-7"> 
+                        
+                        <!--====== Product Right Side Details ======-->
+                        <div class="pd-detail">
+                            <div>
+
+                                <span class="pd-detail__name" id="product-name">  </span></div>
+
+
+                                <div class="u-s-m-b-15">
+
+                                    <ul class="pd-breadcrumb__list">
+                                        <li class="is-marked">
+        
+                                            <p id="product-category"></p>
+                                        </li>
+                                        <ul>
+                                </div>
+
+
+                            <div id="price">
+                                <div class="pd-detail__inline">
+
+                                    <span class="pd-detail__price" id="product-price"></span>  
+                                        <span style="" class="pd-detail__discount" id="discount_percent"></span><del id="product-original-price" class="pd-detail__del"></del>
+                                </div>
+                            </div>
+
+                            <div class="u-s-m-b-15">
+
+                                <span class="pd-detail__preview-desc" id="product-description"></span>
+                            </div>
+
+
+                            <button  class="btn btn--e-brand" type="button" style="border-radius: 0.5rem; padding: 9px;">
+                                <a id="see-product-url" style=" color: white;" href="" >
+                                    see more details
+                                </a>
+                            </button>
+                        </div>
+                        <!--====== End - Product Right Side Details ======-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+</dvi>

@@ -1,0 +1,46 @@
+{% if latest_category_banners %}
+
+    <div class="u-s-p-t-90 u-s-p-b-60">
+
+        <div class="section__intro u-s-m-y-20">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section__text-wrap">
+                            <h1 class="section__heading u-c-secondary u-s-m-b-12" >OUR RECOMMENDS</h1>
+    
+                            <span class="section__span u-c-silver" style=" color: white;" >CHOOSE CATEGORY</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section__content">
+            <div class="container">
+                <div class="row">
+                    {% for bc in latest_category_banners %}
+                        <div class="col-lg-4 col-md-4 col-sm-6 u-s-m-b-30">
+                            <div class="promotion-o">
+                                <div class="aspect aspect--bg-grey aspect--square">
+
+                                    <img class="aspect__img" src="{{ bc.image.url }}" alt="">
+                                </div>
+                                <div class="promotion-o__content">
+                                    {% if bc.button and bc.get_absolute_url != "#" %}
+                                        <a class="promotion-o__link btn--e-white-brand" href="{{ bc.get_absolute_url }}">{{ bc.button }}</a>
+                                    {% elif bc.get_absolute_url != "#" %}
+                                        <a class="promotion-o__link btn--e-white-brand" href="{{ bc.get_absolute_url }}"> check it now</a>
+                                    {% else %}
+                                        <a class="promotion-o__link btn--e-white-brand" href="" style="visibility: hidden;"></a>  
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endif %}

@@ -1,0 +1,48 @@
+{% load static %}
+
+
+{% if discounted_products %}
+<div class="u-s-p-y-60">
+
+
+    <div class="section__intro u-s-m-b-46">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section__text-wrap">
+                        <h1 class="section__heading u-c-secondary u-s-m-b-12">SHOP BY DEALS</h1>
+
+                        <span class="section__span u-c-silver">latest products with discount</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <div class="section__content">
+                <div class="container">
+                    <div class="row">
+                        {% for product in discounted_products %}
+                            <div class="col-lg-3 col-md-3 u-s-m-b-30">
+                                 <a class="collection product-link" href="{% url 'shop:product_detail' product.uuid product.slug %}">
+                                    <div class="aspect aspect--bg-grey aspect--square product-container">
+                                        <img class="aspect__img collection__img product-image" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}" alt="">
+                                            <p class="product-name-overlay">
+                                                {{ product.name }}
+                                            <br>
+                                            <span class="old-price">{{ product.price }}</span>
+                                            <br>
+                                            <span class="new-price">${{ product.get_discounted_price }}</span>
+                                        </p>
+                                    </div>
+                                </a>
+                                
+                            </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+{% endif %}

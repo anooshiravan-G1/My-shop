@@ -1,0 +1,23 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "*"
+pillow = "==6.2.1"
+psycopg2 = "*"
+install = "*"
+rabbitmq = "*"
+flower = "*"
+braintree = "*"
+weasyprint = "*"
+django-rosetta = "*"
+django-parler = "*"
+django-localflavor = "*"
+redis = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"

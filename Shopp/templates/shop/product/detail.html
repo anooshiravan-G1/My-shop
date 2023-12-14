@@ -1,0 +1,52 @@
+{% extends "shop/base.html" %}
+{% load i18n %}
+{% load static %}
+{% block title %}
+{{ product.name }}
+{% endblock %}
+{% block content %}
+    <div class="app-content">
+        <div class="u-s-p-t-90">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-5">
+
+                        {% include 'shop/product/detail/zoom.html'%}
+                            
+                    </div>
+                    <div class="col-lg-7">
+
+                        {% include 'shop/product/detail/right-details.html'%}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="u-s-p-y-90">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="pd-tab">
+
+                            {% include 'shop/product/detail/tabs.html' %}
+
+                            {% include 'shop/product/detail/tab_contents.html'%}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+{% endblock %}

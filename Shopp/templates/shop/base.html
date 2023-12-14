@@ -1,0 +1,36 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>{% block title %}{% trans "My shop" %}{% endblock %}</title>
+
+{% include 'shop/base/css_links.html' %}
+
+</head>
+<body class="config">
+    <div class="preloader is-active">
+        <div class="preloader__wrap">
+
+            <img class="preloader__img" src="images/preloader.png" alt="">
+        </div>
+    </div>
+
+    
+<div id="app">
+    {% include 'shop/base/navbar.html' %}
+    
+    {% block content %}
+    {% endblock %}
+
+</div>
+
+
+{% include 'shop/base/footer.html' %}
+
+
+
+{% include 'shop/base/js_links.html' %}
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% if sliders %}
+<div class="app-content">
+  <div class="s-skeleton s-skeleton--h-600 s-skeleton--bg-grey">
+    <div class="owl-carousel primary-style-1" id="hero-slider">
+        {% for slider in sliders %}
+          {% if slider.type != "banner" and slider.type != "banner2" %}
+          <div class="hero-slide hero-slide--{{ forloop.counter }}" style="background: center center/cover no-repeat url('{{ slider.image.url }}')">
+              <div class="container">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="slider-content slider-content--animation">
+                              
+                        <span class="content-span-1 u-c-secondary">{{ slider.description|safe }}</span>
+                          {% if slider.button and slider.get_absolute_url != "#" %}
+                            <a class="shop-now-link btn--e-brand" href="{{ slider.get_absolute_url }}"> {{ slider.button }}</a>
+                          {% elif slider.get_absolute_url != "#" %}
+                            <a class="shop-now-link btn--e-brand" href="{{ slider.get_absolute_url }}">check it now</a>
+                          {% else %}
+                            <a class="shop-now-link btn--e-brand" href="" style="visibility: hidden;"></a>
+                          {% endif %}
+                        
+                      </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}

@@ -1,0 +1,126 @@
+{% load i18n %}
+{% load static %}
+
+
+<header class="header--style-1">
+
+    <!--====== Nav 1 ======-->
+    <nav class="primary-nav primary-nav-wrapper--border">
+        <div class="container">
+
+            <!--====== Primary Nav ======-->
+            <div class="primary-nav">
+
+                <!--====== Main Logo ======-->
+
+                <a class="main-logo" href="{% url "shop:product_list" %}">
+
+                    <img src="{% static "images/logo/logo-1.png" %}" alt=""></a>
+                <!--====== End - Main Logo ======-->
+
+
+                <!--====== Search Form ======-->
+                <form class="main-form" method="get" action="{% url 'shop:search' %}">
+
+                    <label for="main-search"></label>
+
+                    <input class="input-text input-text--border-radius input-text--style-1" type="text" id="main-search" placeholder="Search" name="q">
+
+                    <button class="btn btn--icon fas fa-search main-search-button" type="submit"></button>
+                        
+                </form>
+                <!--====== End - Search Form ======-->
+
+
+                <!--====== Dropdown Main plugin ======-->
+                <div class="menu-init" id="navigation">
+
+                    <button class="btn btn--icon toggle-button toggle-button--secondary fas fa-cogs" type="button"></button>
+
+                    <!--====== Menu ======-->
+                    <div class="ah-lg-mode">
+
+                        <span class="ah-close">✕ Close</span>
+
+                        <!--====== List ======-->
+                        <ul class="ah-list ah-list--design1 ah-list--link-color-secondary">
+                            <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title="Account">
+
+                                <a><i class="far fa-user-circle"></i></a>
+
+                                <!--====== Dropdown ======-->
+
+                                <span class="js-menu-toggle"></span>
+                                <ul style="width:120px">
+                                    {% if user.is_authenticated %}
+                                    <li>
+
+                                        <a href="{% url 'accounts:user_dashboard' %}"><i class="fas fa-user-circle u-s-m-r-6"></i>
+
+                                            <span>Account</span></a>
+                                    </li>
+                                    <li>
+
+                                        <a href="{% url 'accounts:logout' %}"><i class="fas fa-lock-open u-s-m-r-6"></i>
+
+                                            <span>Sign Out</span></a>
+                                    </li>
+                                    {% else %}
+                                    <li>
+
+                                        <a href="{% url 'accounts:login' %}"><i class="fas fa-lock u-s-m-r-6"></i>
+
+                                            <span>Sign In</span></a>
+                                    </li>
+                                    <li>
+
+                                        <a href="{% url 'accounts:signup' %}"><i class="fas fa-user-plus u-s-m-r-6"></i>
+
+                                            <span>Sign Up</span></a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+
+                            <li data-tooltip="tooltip" data-placement="left" title="Contact">
+
+                                <a href="tel:+0900901904"><i class="fas fa-phone-volume"></i></a>
+                            </li>
+                            <li data-tooltip="tooltip" data-placement="left" title="Mail">
+
+                                <a href="mailto:contact@domain.com"><i class="far fa-envelope"></i></a>
+                            </li>
+                            <li data-tooltip="tooltip" data-placement="left" title="cart">
+                                <div class="cart">
+                                    <a href="{% url "cart:cart_detail" %}" style="color: gray;">
+                                        <i class="fas fa-shopping-bag"></i>
+                                    {% with total_items=cart|length %}
+                                    {% if total_items > 0 %}
+                                    {% trans "Your cart" %}:
+                                    
+                                        {% blocktrans with total=cart.get_total_price count items=total_items %}
+                                            {{ items }} item, ${{ total }}
+                                            {% plural %}
+                                            {{ items }} items, ${{ total }}
+                                        {% endblocktrans %}
+                                   
+                                    {% else %}
+                                    {% trans "Your cart is empty." %}
+                                    {% endif %}
+                                    {% endwith %}
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                        <!--====== End - List ======-->
+                    </div>
+                    <!--====== End - Menu ======-->
+                </div>
+                <!--====== End - Dropdown Main plugin ======-->
+            </div>
+            <!--====== End - Primary Nav ======-->
+        </div>
+    </nav>
+    <!--====== End - Nav 1 ======-->
+
+</header>
