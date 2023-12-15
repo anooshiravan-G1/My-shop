@@ -10,10 +10,11 @@
    - [prdoucts](#prdoucts)
    - [user dashboard](#dashboard)
    - [edit user profile](#edit-profile)
-   - [orders](#ordres)
+   - [orders](#orders)
    - [cart](#cart)
-   - [other](#other)
-4. [Additional Page](#additional-page)
+   - [others](#others)
+4. [How to Run](#how-to-run)
+5. [Frontend Template](#frontend-template)
 
 
 
@@ -138,7 +139,7 @@ orders list:
 ![Index Page](./images/cart.png)
 
 
-### Other
+### Others
 
 "My shop" contains other pages too. look like contact us, about us, sign up, log in, log out, change password and reset password(forget passord).
 
@@ -200,7 +201,7 @@ Once the migrations are created, you can apply them by running the following com
 
 This command will apply the migrations to the Django application running in the web service.
 
-Once the services are up and running, you can access the application by opening a web browser and navigating to http://localhost:8080 (replace 8080 with the port number specified in the Docker Compose file if it's different).
+Once the services are up and running, you can access the application by opening a web browser and navigating to 127.0.0.1:8000.
 
 
 ## Frontend Template
