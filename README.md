@@ -8,6 +8,7 @@
 2. [Pages](#pages)
    - [index](#index)
    - [prdoucts](#prdoucts)
+   - [details](#details)
    - [user dashboard](#dashboard)
    - [edit user profile](#edit-profile)
    - [orders](#orders)
@@ -89,6 +90,20 @@ product grid:
 product list:
 
 ![Index Page](./images/products_list.png)
+
+
+### details
+
+in this we will have details of a product. also there is another section that contains 3 part.
+1. explains about a product. you can add tables, videos and etc here.  
+2. specifications. in this part we can know more about a product. 
+3. comments. everybody can write their own comments about a product in this part. 
+
+***Screenshots***
+
+![details 1](./images/details1.png)
+
+![details 1](./images/details2.png)
 
 
 ### Dashboard
@@ -175,7 +190,7 @@ PS: I should mention that I use [debugmail.io](https://debugmail.io/) to test em
 
 ## How to Run
 
-To run this Django project with Docker Compose, you'll need to have Docker and Docker Compose installed on your machine. If you haven't installed them yet, you can download Docker from [here](https://www.docker.com/products/docker-desktop/).
+To run this Django project, you'll need to have Docker installed on your machine. you can download Docker from  [here](https://www.docker.com/products/docker-desktop/).
 
 Once you have Docker and Docker Compose installed, follow these steps:
 
