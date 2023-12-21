@@ -101,9 +101,9 @@ in this we will have details of a product. also there is another section that co
 
 ***Screenshots***
 
-![details 1](./images/details1.png)
+![details 1](./images/details_1.png)
 
-![details 1](./images/details2.png)
+![details 1](./images/details_2.png)
 
 
 ### Dashboard
